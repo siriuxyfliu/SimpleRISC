@@ -57,6 +57,16 @@ architecture Behavioral of test1 is
         s1 : out STD_LOGIC_VECTOR (31 downto 0)
     );
     end component;
+    
+    component full_adder
+    Port ( 
+        a0 : in STD_LOGIC;
+        a1 : in STD_LOGIC;
+        c_in : in STD_LOGIC;
+        sum : out std_logic;
+        c_out : out STD_LOGIC);
+    end component;
+    
     signal ai1 : std_logic_vector (31 downto 0):=(others => '0');
     signal ai2 : std_logic_vector (31 downto 0):=(others => '0');
     signal so1 : std_logic_vector (31 downto 0):=(others => '0');
@@ -64,33 +74,70 @@ architecture Behavioral of test1 is
     signal clk_r : std_logic;
     signal rst_t : std_logic:='0';
     constant period : time := 10 ns;
-    
+    signal cin : std_logic;   
+    signal cout : std_logic;   
+    signal sum : std_logic;   
 begin
-    aut : adder
-    port map 
+    
+    faut: full_adder
+    port map
     (
-        clk_i=>clk_t,
-        a1=>ai1,
-        a2=>ai2,
-        s1=>so1
+        a0=>ai1(0),
+        a1=>ai2(0),
+        c_in=>cin,
+        sum=> sum,
+        c_out=> cout
     );
     
     process is
-    begin
-        wait for 10ns;
-        ai1(0)<='0';
-        ai2(0)<='0';
-        wait for 10ns;
-        ai1(0)<='1';
-        ai2(0)<='0';
-        wait for 10ns;
-        ai1(0)<='0';
-        ai2(0)<='1';
-        wait for 10ns;
-        ai1(0)<='1';
-        ai2(0)<='1';
-        wait ;        
-    end process;
+       begin
+           wait for 10ns;
+           ai1(0)<='0';
+           ai2(0)<='0';
+           cin<='0';
+           wait for 10ns;
+           ai1(0)<='1';
+           ai2(0)<='0';
+           cin<='0';
+           wait for 10ns;
+           ai1(0)<='0';
+           ai2(0)<='1';
+           cin<='0';
+           wait for 10ns;
+           ai1(0)<='1';
+           ai2(0)<='1';
+           cin<='0';
+           wait for 10ns;
+           ai1(0)<='0';
+           ai2(0)<='0';
+           cin<='1';
+           wait for 10ns;
+           ai1(0)<='1';
+           ai2(0)<='0';
+           cin<='1';
+           wait for 10ns;
+           ai1(0)<='0';
+           ai2(0)<='1';
+           cin<='1';
+           wait for 10ns;
+           ai1(0)<='1';
+           ai2(0)<='1';
+           cin<='1';
+           wait ;       
+       end process;
+       
+    
+    
+    
+--    aut : adder
+--    port map 
+--    (
+--        clk_i=>clk_t,
+--        a1=>ai1,
+--        a2=>ai2,
+--        s1=>so1
+--    );
+    
     
     uut : clock_divider
     port map (

@@ -35,12 +35,13 @@ entity full_adder is
     Port ( a0 : in STD_LOGIC;
            a1 : in STD_LOGIC;
            c_in : in STD_LOGIC;
-           c_out : in STD_LOGIC);
+           sum : out std_logic;
+           c_out : out STD_LOGIC);
 end full_adder;
 
 architecture Behavioral of full_adder is
 
 begin
-
-
+    c_out<= (a0 and a1) or (a0 and c_in) or (a1 and c_in);
+    sum<= ((NOT c_in) and (a0 xor a1)) or (c_in and (a0 xnor a1));
 end Behavioral;
