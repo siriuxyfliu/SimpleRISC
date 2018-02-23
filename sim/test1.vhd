@@ -58,14 +58,14 @@ architecture Behavioral of test1 is
     );
     end component;
     
-    component full_adder
-    Port ( 
-        a0 : in STD_LOGIC;
-        a1 : in STD_LOGIC;
-        c_in : in STD_LOGIC;
-        sum : out std_logic;
-        c_out : out STD_LOGIC);
-    end component;
+--    component full_adder
+--    Port ( 
+--        a0 : in STD_LOGIC;
+--        a1 : in STD_LOGIC;
+--        c_in : in STD_LOGIC;
+--        sum : out std_logic;
+--        c_out : out STD_LOGIC);
+--    end component;
     
     signal ai1 : std_logic_vector (31 downto 0):=(others => '0');
     signal ai2 : std_logic_vector (31 downto 0):=(others => '0');
@@ -79,15 +79,15 @@ architecture Behavioral of test1 is
     signal sum : std_logic;   
 begin
     
-    faut: full_adder
-    port map
-    (
-        a0=>ai1(0),
-        a1=>ai2(0),
-        c_in=>cin,
-        sum=> sum,
-        c_out=> cout
-    );
+--    faut: full_adder
+--    port map
+--    (
+--        a0=>ai1(0),
+--        a1=>ai2(0),
+--        c_in=>cin,
+--        sum=> sum,
+--        c_out=> cout
+--    );
     
     process is
        begin
